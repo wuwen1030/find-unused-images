@@ -1,7 +1,7 @@
 # ######################################################
 # The MIT License (MIT)
 #
-# Copyright (c) 2014-2016 BinXia，wuwen.xb@alibaba-inc.com
+# Copyright (c) 2014-2016 BinXia wuwen.xb@alibaba-inc.com
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -89,7 +89,7 @@ class UnusedImageFinder:
             else:
                 match = re.match(pattern, subPathName)
                 if match:
-                    self.imageFiles[match.groups()[0]] = match.groups()[0]
+                    self.imageFiles[match.groups()[0]] = subPath
 
     def findImageRefInPath(self, path):
         for subPathName in os.listdir(path):
@@ -104,7 +104,7 @@ class UnusedImageFinder:
     def findImageRefInFile(self, filePath):
         if not os.path.exists(filePath):
             return
-        print("Checking [%s] ..." % filePath)
+        print "Checking [%s] ..." % filePath
 
         fileHandle = open(filePath, "r")
         isComment = False
@@ -159,8 +159,11 @@ class UnusedImageFinder:
         self.findImageRefInPath(self.sourceFilePath)
         # Output results
         outputFilePath = os.path.join("result.txt")
-        with open(outputFilePath, "w") as f:
-            f.writelines("\n".join(self.imageFiles.keys()))
+        if os.path.exists(outputFilePath):
+            os.remove(outputFilePath)
+        with open(outputFilePath, "a") as f:
+            for key in self.imageFiles:
+                f.write(key + "\t" + self.imageFiles[key] + "\n")
         print "Done! Result has been written to %s" % outputFilePath
 
 

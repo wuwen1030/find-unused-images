@@ -1,16 +1,39 @@
-find-unused-images
+## Unused-images-finder
 ==================
 
-Find unused images in a xcode project
-###作用：
-通过此脚本可以找出工程中没有引用的文件，缩减安装包的大小。
-###使用方法：
-命令 "python trimpackage.py .xcodeproj文件路径"，比如"python find_unused_images.py /Users/xia/Desktop/SVN_CODE/Hosting-iOS/HostingReport/Hosting/Hosting.xcodeproj "
-###说明：
-* 目前仅能检测 imageNamed:@"xxxx"的形式
-* icon Default文件由于没有在代码中出现，因此结果是有误的，请注意不要误删
-* 暂时还未支持".xib"".storyboard"引用图片检测的功能
-* 对于imageNamed:@"xxxx_%d"这种形式的引用不能正确的检测
+Find the unused images in a Xcode project.
 
-###建议：
-删除文件之前最好做好确认工作
+### Why `Unused_images_finder`
+
+Today, the size of APPs are getting very large. But disk space is still expensive on iPhone. So we need to optimize the package size. Besides, as developers, we should keep the project clean, and remove the rubish resources.
+
+### Usage
+Clone or download the source file.
+
+```
+git clone git@github.com:wuwen1030/find-unused-images.git
+```
+
+Open the Terminal, run the command as follows:
+
+```
+python unused_images_finder.py PROJECT_PATH {SOURCE_PATH}
+```
+
+`PROJECT_PATH` is required, set the argument to your project file. `SOURCE_PATH` is optonal, default is the parent path of project file. We usually set this to the root path of project.
+
+### Known issues
+1. `.storyboard` & `.xib` is not supported.
+2. Images which are not referred with file names directly cann't be recognized correctly. e.g
+	
+	```objc
+	NSString *imageName = @"imageName";
+	UIImage *image = [UIImage imageNamed:imageName];
+	...
+	UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"xxx%d", 2]]
+	```	
+	
+3. Miss the target
+	* Icon & Launch files are not referred in the code files, which will be recognized uncorrectly.
+	* Images described in the issues #2
+	
