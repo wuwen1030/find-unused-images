@@ -1,4 +1,4 @@
-## Unused-images-finder
+Unused-images-finder
 ==================
 
 Find the unused images in a Xcode project.
