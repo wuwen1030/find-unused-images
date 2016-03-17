@@ -37,3 +37,6 @@ python unused_images_finder.py PROJECT_PATH {SOURCE_PATH}
 	* Icon & Launch files are not referred in the code files, which will be recognized uncorrectly.
 	* Images described in the issues #2
 	
+### More
+
+[My blog](http://wuwen1030.github.io/2016/03/17/%E6%9F%A5%E6%89%BEXcode%E5%B7%A5%E7%A8%8B%E6%9C%AA%E4%BD%BF%E7%94%A8%E7%9A%84%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/)
